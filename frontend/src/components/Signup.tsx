@@ -1,19 +1,21 @@
-import react from "react"
+import Quote from "./Quote"
+import Auth from "./Auth"
 
-export default function Signup(){
-    return(
+export default function Signup() {
+    return (
         <>
-        <div className="flex justify-center items-center min-h-screen bg-black">
-            <div className=" flex bg-red-400 w-80 h-96 rounded-xl">
-                
-                hello
+            <div className="grid md:grid-cols-2">
+                <div>
+                    <Auth type="signup" />
+                </div>
+                <div className="hidden md:block">
+                    <Quote />
+                </div>
+
             </div>
 
-        </div>
-      
         </>
-        )
-    
+    )
+
 }
 
-   

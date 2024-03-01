@@ -18,11 +18,10 @@ userRouter.post('/signup', async (c: any) => {
 
     const body = await c.req.json();
     console.log(body)
-    const{success} = signupInput.safeParse(body);
-    if(!success){
-        return c.json({
-            "message":"Please give valid inputs"
-        })
+    const result = signupInput.safeParse(body);
+    if(!result.success){
+        c.status(401);
+		return c.json({ error: "Invlaid Inputs" });
     }
 
     try {
@@ -37,7 +36,7 @@ userRouter.post('/signup', async (c: any) => {
 
         const token = await sign({ id: user.id }, c.env.JWT_SECRET)
         return c.json({
-            tokne: token
+            token: token
         })
     } catch (e) {
         console.log(e)
@@ -53,10 +52,12 @@ userRouter.post('/signup', async (c: any) => {
 //signin
 userRouter.post('/signin', async (c: any) => {
     const body = await c.req.json();
-    const {success} =body.safeParse(body)
+
+    const {success} =signinInput.safeParse(body)
     if(!success){
+        c.status(401)
         return c.json({
-            "message":"Give valid inputs"
+            error:"Invalid Inputs"
         })
     }
 
@@ -70,7 +71,7 @@ userRouter.post('/signin', async (c: any) => {
     if (!user) {
         c.status(403);
         return c.json({
-            "message": "user not found"
+            error: "user not found"
         })
     }
     const token = await sign({ id: user.id }, c.env.JWT_SECRET)

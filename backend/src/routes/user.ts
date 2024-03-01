@@ -2,6 +2,8 @@ import { PrismaClient } from '@prisma/client/edge'
 import { withAccelerate } from '@prisma/extension-accelerate'
 import { Hono } from 'hono'
 import { sign } from "hono/jwt"
+import {signupInput,signinInput} from "sanjeev100x"
+
 
 export const userRouter = new Hono<{
     Bindings: {
@@ -16,6 +18,13 @@ userRouter.post('/signup', async (c: any) => {
 
     const body = await c.req.json();
     console.log(body)
+    const{success} = signupInput.safeParse(body);
+    if(!success){
+        return c.json({
+            "message":"Please give valid inputs"
+        })
+    }
+
     try {
         const user = await c.prisma.user.create({
             data: {
@@ -44,6 +53,12 @@ userRouter.post('/signup', async (c: any) => {
 //signin
 userRouter.post('/signin', async (c: any) => {
     const body = await c.req.json();
+    const {success} =body.safeParse(body)
+    if(!success){
+        return c.json({
+            "message":"Give valid inputs"
+        })
+    }
 
     const user = await c.prisma.user.findUnique({
         where: {

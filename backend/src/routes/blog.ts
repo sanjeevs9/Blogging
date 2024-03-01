@@ -1,6 +1,7 @@
 import { Hono } from 'hono'
 import { sign } from "hono/jwt"
 import { connect } from 'mongoose'
+import {createPostInput,updatePostInput} from "sanjeev100x"
 
 export const blogRouter=new Hono<{
     
@@ -11,6 +12,13 @@ blogRouter.post('',async (c:any)=>{
 
     const id=c.get("userId")
     const body=await c.req.json()
+
+    const {success} =createPostInput.safeParse(body)
+    if(!success){
+      return  c.json({
+        "message":"Give valid inputs"
+      })
+    }
     try{
       const blog=await c.prisma.post.create({
         data:{
@@ -35,6 +43,13 @@ blogRouter.post('',async (c:any)=>{
   }).put(async(c:any)=>{
     const id=c.get("userId")
     const body=await c.req.json();
+    const {success} =updatePostInput.safeParse(body);
+    if(!success){
+      c.json({
+        "messgae":"please give valid inputs"
+      })
+    }
+
     console.log(id)
     console.log(body)
     try{

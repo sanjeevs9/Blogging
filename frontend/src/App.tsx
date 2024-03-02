@@ -1,7 +1,7 @@
 
 import './App.css'
 import { BrowserRouter,Route,Routes } from 'react-router-dom'
-import Blog from "./components/Blog.tsx"
+import Blogs from "./components/Blogs.tsx"
 import Signup from './components/Signup.tsx'
 import Signin from './components/Signin.tsx'
 import Help from './components/Help.tsx'
@@ -13,7 +13,7 @@ function App() {
     <BrowserRouter>
    <Routes>
     <Route path="/" element={<Quote/>}/>
-    <Route path='/blog' element={<Blog/>}/>
+    <Route path='/blogs' element={<Blogs/>}/>
     <Route path='/signup' element={<Signup/>}/>
     <Route path ='/signin' element={<Signin/>}/>
    </Routes>

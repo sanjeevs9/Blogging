@@ -16,6 +16,7 @@ const app = new Hono<{
     userId: string;
   };
 }>();
+app.use("/*",cors());
 
 //connection
 app.use("*", async (c: any, next: Next) => {
@@ -32,12 +33,11 @@ app.use("*", async (c: any, next: Next) => {
 //middleware
 app.use("/api/v1/blog/*", async (c, next) => {
   const res = c.req.header("Authorization");
-
-
+console.log(res+"resss")
   if (!res?.startsWith("Bearer")) {
     c.status(403);
     return c.json({
-      message: "wrong token! Please signin",
+      message: "You are not Signned",
     });
   }
   const token = res.split(" ")[1];
@@ -54,7 +54,7 @@ app.use("/api/v1/blog/*", async (c, next) => {
   await next();
 });
 
-app.use("/*",cors());
+
 app.route("/api/v1/user", userRouter);
 app.route("/api/v1/blog", blogRouter);
 

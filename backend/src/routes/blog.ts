@@ -79,7 +79,15 @@ blogRouter.post('',async (c:any)=>{
     //get all blogs
     blogRouter.get('/bulk',async(c:any)=>{
       console.log("hello")
-      const blogs=await c.prisma.post.findMany({})
+      const blogs=await c.prisma.post.findMany({
+        include:{
+          author:{
+            select:{
+              name:true
+            }
+          }
+        }
+      })
       console.log(blogs)
       return c.json({blogs})
     })

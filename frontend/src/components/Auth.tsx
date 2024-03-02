@@ -22,7 +22,7 @@ export default function Auth(props: { type: "signup" | "signin" }) {
         ).then(res=>{
             console.log(res.data)
             localStorage.setItem("token",res.data.token);
-            navigate('/blog') 
+            navigate('/blogs') 
         })
         }catch(e:any){
             console.log(e)

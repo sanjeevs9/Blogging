@@ -2,7 +2,7 @@ import BlogCard from "./BlogCard";
 import Header from "./Header";
 import { useBlogs } from "../hooks/useBlogs";
 import { createAvatar } from '@dicebear/core';
-import { avataaars,bottts,micah, miniavs} from '@dicebear/collection';
+import { miniavs} from '@dicebear/collection';
 
 const avatar=(seed:string) =>createAvatar( miniavs, {
   seed:seed

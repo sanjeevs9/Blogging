@@ -3,6 +3,10 @@ import icon from "../icons/blogger.svg"
 import Popup from "./Popup";
 import { createAvatar } from '@dicebear/core';
 import { bottts } from '@dicebear/collection';
+import { useNavigate,Link,useLocation } from "react-router-dom";
+
+
+
 const seed = Math.random().toString();
 const avatar = createAvatar(bottts, {
     seed:seed
@@ -10,6 +14,8 @@ const avatar = createAvatar(bottts, {
 
 const svg = avatar.toString();
 export default function Header() {
+    const navigate =useNavigate();
+    const location = useLocation();
     const [pop, setpop] = useState(false);
 
     function onClick() {
@@ -23,13 +29,13 @@ export default function Header() {
                         {/* <div className="flex flex-col justify-center text-xl font-extrabold">
                         BLOG
                        </div> */}
-                        <div className="w-10 h-10  flex flex-col justify-center ">
-                            <img src={icon} alt="Blogger Icon" />
+                        <div className="w-10 h-10  flex flex-col justify-center cursor-pointer">
+                            <img src={icon} alt="Blogger Icon" onClick={()=>{navigate('/blogs')}}/>
                         </div>
                     </div>
                     <div className="flex  w-1/2 gap-8 justify-end p-3 items-center" >
 
-                        <div className="flex  gap-1 hover:inset-2 cursor-pointer hover:scale-110 motion-reduce:transform-none">
+                        <Link to={`${location.pathname}/write`} className="flex  gap-1 hover:inset-2 cursor-pointer hover:scale-110 motion-reduce:transform-none">
 
                             <div className="h-8 w-8 flex-row  ">
                                 <svg className="flex" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
@@ -41,7 +47,7 @@ export default function Header() {
                                 Write
                             </div>
 
-                        </div>
+                        </Link>
 
 
                         <div

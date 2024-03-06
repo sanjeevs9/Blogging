@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { SigninInput, SignupInput } from "sanjeev100x";
+import { SignupInput } from "sanjeev100x";
 import axios from "axios"
 import { network } from "../configure";
 

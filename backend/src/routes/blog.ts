@@ -13,6 +13,8 @@ blogRouter.post('',async (c:any)=>{
     const id=c.get("userId")
     const body=await c.req.json()
 
+console.log(body)
+console.log(id)
     const {success} =createPostInput.safeParse(body)
     if(!success){
       return  c.json({

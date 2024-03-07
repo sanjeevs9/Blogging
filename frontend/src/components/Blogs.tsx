@@ -3,6 +3,7 @@ import Header from "./Header";
 import { useBlogs } from "../hooks/useBlogs";
 import { createAvatar } from '@dicebear/core';
 import { miniavs} from '@dicebear/collection';
+import Skeleton from "./Skeleton";
 
 const avatar=(seed:string) =>createAvatar( miniavs, {
   seed:seed
@@ -15,9 +16,14 @@ export default function Blogs() {
     const { loading, blogs } = useBlogs();
     console.log
     if (loading) {
-        return <div>
-            loading....
-        </div>
+        return<>
+          <Header/> 
+        <Skeleton/>
+        <Skeleton/>
+        <Skeleton/>
+        
+        <Skeleton/>
+        </> 
     }
     return (
         <>
@@ -35,6 +41,7 @@ export default function Blogs() {
                                     title={blog.title}
                                     content={blog.content}
                                     avatar={svg.toString()}
+                                    id={blog.id}
                                 ></BlogCard>
                             )
                         })

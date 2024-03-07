@@ -6,6 +6,7 @@ import Signup from './components/Signup.tsx'
 import Signin from './components/Signin.tsx'
 import Quote from './components/Quote.tsx'
 import Write from './components/Write.tsx'
+import SingleBlog from './components/SingleBlog.tsx'
 
 function App() {
   
@@ -17,6 +18,7 @@ function App() {
     <Route path='/signup' element={<Signup/>}/>
     <Route path ='/signin' element={<Signin/>}/>
     <Route path="/blogs/write" element={<Write/>}/>
+    <Route path="/blog/:id" element={<SingleBlog/>}/>
    </Routes>
 
     </BrowserRouter>

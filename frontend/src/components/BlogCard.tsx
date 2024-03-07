@@ -1,10 +1,15 @@
+import axios from "axios"
+import { network } from "../configure"
+import SingleBlog from "./SingleBlog"
+import { Link } from 'react-router-dom';
 
 interface Blog {
     author: string,
     published: String,
     title: string,
     content: string,
-    avatar:string
+    avatar:string,
+    id:string
 }
 
 export default function BlogCard({
@@ -12,10 +17,17 @@ export default function BlogCard({
     published,
     title,
     content,
-    avatar
-}: Blog) {
-    return <div className="justify-center
-    ">
+    avatar,
+    id
+}: Blog)
+{
+    return(
+        <>
+        <Link 
+  to={`/blog/${id}`}
+>
+        <div className="justify-center  cursor-pointer  
+    " id={id} >
         <div className="flex flex-row pb-2">
         <div 
   className="h-6 w-6 rounded-full flex bg-red-300 flex-col items-center justify-center overflow-hidden" 
@@ -38,7 +50,7 @@ export default function BlogCard({
         <div className="font-bold">
             {title}
         </div>
-        <div className="text-sm pb-4 max-w-xl">
+        <div className="text-sm pb-4 max-w-xl   whitespace-normal overflow-wrap break-words">
             {content.length>=100?content.slice(0,200)+"...":content+"..."}
             {/* {content.slice(100) + "..."} */}
         </div>
@@ -50,4 +62,7 @@ export default function BlogCard({
         </div>
 
     </div>
+    </Link>
+        </>
+    ) 
 }

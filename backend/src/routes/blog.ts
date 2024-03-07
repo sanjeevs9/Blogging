@@ -96,17 +96,33 @@ console.log(id)
     
   
   //get single post
-  blogRouter.get('/:id' , async(c:any)=>{
-    const id=c.req.param("id")
-    console.log(id)
-    console.log("noooooo")
-    const blog=await c.prisma.post.findUnique({
-      where:{
-        id
+  blogRouter.get('/id/:id' , async(c:any)=>{
+    try {
+      let id=c.req.param("id")
+      console.log(id);
+      console.log('Before query');
+      
+      const blog = await c.prisma.post.findUnique({
+        where: {
+            id: "569c9aed-6967-4276-93c8-679c3957e209"
+        },
+        include: {
+          author: {
+              select: {
+                  name: true
+              }
+          }
       }
-    })
-    return c.json({
-      blog
-    })
-  })
+    });
+      console.log('After query');
+      return c.json({
+        blog
+      });
+    } catch (error) {
+      console.log(error);
+      c.res.status(500).json({
+        message: 'An error occurred'
+      });
+    }
+  });
   

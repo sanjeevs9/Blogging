@@ -1,1 +1,1 @@
-export const network="http://127.0.0.1:8787";
+export const network="https://medium.sanjeev-19kr.workers.dev";

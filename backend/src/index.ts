@@ -23,6 +23,7 @@ app.use("*", async (c: any, next: Next) => {
   const prisma = new PrismaClient({
     datasourceUrl: c.env.DATABASE_URL,
   }).$extends(withAccelerate());
+  console.log(c.env.DATABASE_URL)
 
   c.prisma = prisma;
 
@@ -31,7 +32,7 @@ app.use("*", async (c: any, next: Next) => {
 
 
 //middleware
-app.use("/api/v1/blog/*", async (c, next) => {
+app.use("/api/v1/blog/*", async (c:any, next:Next) => {
   const res = c.req.header("Authorization");
 console.log(res+"resss")
   if (!res?.startsWith("Bearer")) {
